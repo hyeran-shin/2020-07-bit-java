@@ -1,0 +1,8 @@
+try(
+				FileOutputStream fos = new FileOutputStream(fobj);
+				ObjectOutputStream oos = new ObjectOutputStream(fos)
+		){
+			oos.writeObject(boardList);
+		}catch(Exception e ) {
+			e.print
+		}

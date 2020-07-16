@@ -1,0 +1,28 @@
+package com.bit.board;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+import org.apache.ibatis.session.SqlSession;
+
+// 사용 시에만 받아오도록 Factory 정의
+public class ConnectionFactory {
+	private static SqlSession session = null;
+	
+	public 
+	
+	public Connection getConnection() {
+		
+		Connection con = null;
+		
+		try {
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return con;
+	}
+	
+	
+}

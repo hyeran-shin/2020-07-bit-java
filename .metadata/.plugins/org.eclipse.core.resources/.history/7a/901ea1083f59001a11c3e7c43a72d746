@@ -1,0 +1,27 @@
+package com.bit.book.ui;
+
+import java.util.Scanner;
+
+import com.bit.book.factory.ServiceFactory;
+import com.bit.book.service.BookService;
+
+public abstract class BaseUI implements IBookUI {
+	private Scanner s;
+	protected BookService service;
+
+	public BaseUI() {
+		s = new Scanner(System.in);
+		service = ServiceFactory.getInstance();
+	}
+	
+	protected int scanInt(String msg) {
+		System.out.println(msg);
+		return s.nextInt();
+	}
+
+	protected String scanStr(String msg) {
+		System.out.println(msg);
+		return s.nextLine();
+	}
+
+}

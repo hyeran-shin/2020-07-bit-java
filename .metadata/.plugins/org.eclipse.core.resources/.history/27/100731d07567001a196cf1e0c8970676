@@ -1,0 +1,14 @@
+package com.bit.alg2018;
+
+//문자열 내 p와 y의 개수
+public class Alog04 {
+	static boolean solution(String s) {
+		boolean answer = true;
+
+		return answer;
+	}
+
+	public static void main(String[] args) {
+		solution("pPoooyY");
+	}
+}

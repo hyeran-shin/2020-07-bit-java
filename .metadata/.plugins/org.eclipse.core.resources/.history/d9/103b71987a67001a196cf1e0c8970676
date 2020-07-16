@@ -1,0 +1,15 @@
+package com.bit.alg2018;
+
+//문자열 다루기 기본
+public class Alog06 {
+	public static boolean solution(String s) {
+		boolean answer = true;
+		
+		
+		return answer;
+	}
+
+	public static void main(String[] args) {
+
+	}
+}

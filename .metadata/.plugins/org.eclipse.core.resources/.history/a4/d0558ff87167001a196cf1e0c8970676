@@ -1,0 +1,17 @@
+package com.bit.alg2018;
+
+// 두 정수 사이의 합
+
+class Solution {
+	  public long solution(int a, int b) {
+	      long answer = 0;
+	      return answer;
+	  }
+	}
+
+public class Alog02 {
+	public static void main(String[] args) {
+		long result = solution(3,5);
+		System.out.println(result);
+	}
+}

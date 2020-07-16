@@ -1,0 +1,16 @@
+package com.bit.alg2018;
+
+//문자열 내림차순으로 배치하기
+public class Alog05 {
+	
+	public static String solution(String s) {
+	      String answer = "";
+	      s.chars().sorted().forEach(System.out::println);
+	      
+	      
+	      return answer;
+	  }
+	public static void main(String[] args) {
+		solution("Zbcdefg");
+	}
+}

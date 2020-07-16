@@ -1,0 +1,19 @@
+package com.bit.alg2018;
+
+//문자열 내 마음대로 정렬하기
+public class Alog03 {
+	public static String[] solution(String[] strings, int n) {
+	      String[] answer = {};
+	      
+	      
+	      return answer;
+	  }
+	
+	
+	public static void main(String[] args) {
+		String[] strings = {"sun","bed","car"};
+		String[] result = solution(strings, 1);
+		
+		System.out.println(result.toString());
+	}
+}

@@ -1,0 +1,89 @@
+package com.bit.board.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.bit.board.MysqlSessionFactory;
+import com.bit.board.util.JDBCClose;
+import com.bit.board.vo.BoardVO;
+
+// DAO : Data Access Object
+//   -> 데이터베이스(파일 시스템)에 접근하기 위한객체 
+
+public class BoardDAO {
+	private List<BoardVO> boardList = new ArrayList<>();	
+	private SqlSession session = null;
+	
+	public BoardDAO() {
+		super(); 
+		session = new MysqlSessionFactory().getInstance();
+	}
+	
+	/**
+	 * 게시글 등록 기능
+	 */
+	public int insertBoard(BoardVO board) throws Exception {
+		int insertCnt = 0;
+		
+//		if(sqlMap.insert("insertBoard", dbNm) == null){
+//			return 1;
+//			}else{
+//			return 0;
+//			}
+		
+		System.out.println("세션 값!!!!!!!!!! : " + session.insert("com.bit.insertBoatd", board) );
+		return insertCnt;
+	}
+	
+	/**
+	 *  전체 게시글 조회
+	*/
+	public List<BoardVO> selectBoard() throws Exception{
+		boardList.clear();
+		boardList = session.selectList("com.bit.selectBoard");
+		return boardList;
+		
+	}
+
+	/**
+	 *  게시글 번호 조회
+	*/  
+	public BoardVO selectOneBoard(BoardVO board)  throws Exception {
+		BoardVO vo = session.selectOne("com.bit.selectOneBoard", board);	
+		return vo;		
+	}
+	
+
+	
+	/**
+	 * 게시글 수정
+	 */
+	public int updateBoard(BoardVO board) {
+		int updateCnt = 0;
+		updateCnt = session.update("com.bit.updateBoard",board);
+		return updateCnt;
+		
+	}
+
+	
+	/**
+	 * 게시물 삭제 
+	*/
+	public int deleteBoard(BoardVO board) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int deleteCnt = 0;
+		deleteCnt = session.delete("com.bit.deleteBoard",board);
+		return deleteCnt;
+	}
+	
+	
+
+
+
+}

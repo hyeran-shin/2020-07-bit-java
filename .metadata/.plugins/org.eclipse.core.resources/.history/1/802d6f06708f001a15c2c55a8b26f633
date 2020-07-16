@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+ <configuration>
+ 	<!-- DB접속을 위한 4가지 설정 속성을 가져와라. (db.properties 파일) -->
+ 	
+ 	<!-- 오브젝트 타입에 별칭을 붙여 사용하겠다. -->
+ 	<typeAliases>
+ 		<typeAlias alias="board" type="com.bit.board.BoardVo" />
+ 	</typeAliases>
+
+ 	<mappers>
+ 		<mapper resource="common/db/board.xml" />
+ 	</mappers>
+ 	
+ </configuration>

@@ -1,0 +1,37 @@
+package com.bit.alg2018;
+//나누어 떨어지는 숫자배열
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Alog01 {
+	static int[] solution(int[] arr , int divisor) {
+		int[] answer = {};
+		
+		List<Integer> list = new ArrayList<Integer>();
+		for(int i = 0 ; i <arr.length;i++) {
+			if(arr[i] % divisor==0){
+				list.add(arr[i]);
+			}else if(!(arr[i] % divisor==0)) {
+				list.add(-1);
+			}
+		}
+		Collections.sort(list);
+		for(int i = 0 ; i < list.size() ; i++) {
+			if(list.get(i) !=-1 ) {
+				System.out.println("뭐야");
+//				answer[i] = list.get(i);
+			}else {
+				System.out.println("3개");
+			}
+		}
+//		answer = list.toArray(new int[] {list.size()});
+		return answer;
+	}
+	
+	public static void main(String[] args) {
+		int[] arr = {3,10,2,6};
+		int divisor = 10;
+		solution(arr,divisor);
+	}
+}

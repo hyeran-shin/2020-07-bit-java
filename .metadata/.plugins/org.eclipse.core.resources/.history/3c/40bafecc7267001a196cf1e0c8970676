@@ -1,0 +1,12 @@
+package com.bit.alg2018;
+
+//문자열 내 마음대로 정렬하기
+public class Alog03 {
+	public String[] solution(String[] strings, int n) {
+	      String[] answer = {};
+	      return answer;
+	  }
+	public static void main(String[] args) {
+		
+	}
+}

@@ -1,0 +1,166 @@
+package com.bit.board.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.bit.board.MysqlSessionFactory;
+import com.bit.board.util.JDBCClose;
+import com.bit.board.vo.BoardVO;
+
+// DAO : Data Access Object
+//   -> 데이터베이스(파일 시스템)에 접근하기 위한객체 
+
+public class BoardDAO {
+	private List<BoardVO> boardList = new ArrayList<>();	
+	private SqlSession session = null;
+	
+	public BoardDAO() {
+		super(); 
+		session = new MysqlSessionFactory().getInstance();
+	}
+	
+	/**
+	 * 게시글 등록 기능
+	 */
+	public int insertBoard(BoardVO board) throws Exception {
+		int insertCnt = 0;
+		StringBuilder sql = new StringBuilder();
+		sql.append(" INSERT INTO t_board(title,writer) ");
+		sql.append(" VALUES( ?, ? )  ");
+		
+		PreparedStatement pstmt = con.prepareStatement(sql.toString());
+		pstmt.setString(1,board.getTitle());
+		pstmt.setString(2, board.getWriter());
+		
+//		if(sqlMap.insert("insertBoard", dbNm) == null){
+//			return 1;
+//			}else{
+//			return 0;
+//			}
+		insertCnt = pstmt.executeUpdate();
+		return insertCnt;
+	}
+	
+	/**
+	 *  전체 게시글 조회
+	*/
+	public List<BoardVO> selectBoard() throws Exception{
+		boardList.clear();
+		
+//		Connection con = new ConnectionFactory().getConnection();
+		StringBuilder sql = new StringBuilder();
+		sql.append(" SELECT no, title, writer, reg_date  ");
+		sql.append(" FROM t_board ORDER BY no ");
+		
+		PreparedStatement pstmt = con.prepareStatement(sql.toString());
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			int no = rs.getInt("no");
+			String title = rs.getString("title");
+			String writer = rs.getString("writer");
+			String regDate = rs.getString("reg_date");
+		
+			BoardVO board = new BoardVO(no,title,writer,regDate);
+			boardList.add(board);
+		}
+//		JDBCClose.close(con, pstmt);
+		return boardList;
+		
+	}
+
+	/**
+	 *  게시글 번호 조회
+	*/  
+	public BoardVO selectOneBoard(BoardVO board)  throws Exception {
+		Connection con = new MysqlSessionFactory().getConnection();
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append(" SELECT no, title, writer, reg_date ");
+		sql.append(" FROM t_board WHERE no = ? " );
+		
+		PreparedStatement pstmt = con.prepareStatement(sql.toString());
+		pstmt.setInt(1, board.getNo());
+		
+		ResultSet rs = pstmt.executeQuery();
+		if(!rs.next()) return null;
+		
+		int no = rs.getInt("no");
+		String title = rs.getString("title");
+		String writer = rs.getString("writer");
+		String regDate = rs.getString("reg_date");
+		
+		BoardVO vo = new BoardVO(no, title, writer, regDate);
+		JDBCClose.close(con,pstmt);
+		
+		return vo;
+		
+	}
+	
+	
+	
+	
+	/**
+	 * 게시글 수정
+	 */
+	public int updateBoard(BoardVO board) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int updateCnt = 0;
+		try {
+			con = new MysqlSessionFactory().getConnection();
+			
+			StringBuilder sql = new StringBuilder();
+			sql.append(" UPDATE t_board SET title = ? WHERE no = ? " ); 
+			
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, board.getTitle());
+			pstmt.setInt(2, board.getNo());
+			
+			updateCnt = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCClose.close(con, pstmt);
+		}
+		return updateCnt;
+		
+	}
+
+	
+	/**
+	 * 게시물 삭제 
+	*/
+	public int deleteBoard(BoardVO board) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int deleteCnt = 0;
+		try {
+			con = new MysqlSessionFactory().getConnection();
+			
+			StringBuilder sql = new StringBuilder();
+			sql.append(" DELETE FROM t_board WHERE no = ?");
+			
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, board.getNo());
+			
+			deleteCnt = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCClose.close(con, pstmt);
+		}
+		return deleteCnt;
+	}
+	
+	
+
+
+
+}

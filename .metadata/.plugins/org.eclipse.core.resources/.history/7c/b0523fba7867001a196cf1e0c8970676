@@ -1,0 +1,18 @@
+package com.bit.alg2018;
+
+import java.util.Arrays;
+
+//문자열 내림차순으로 배치하기
+public class Alog05 {
+	
+	public static String solution(String s) {
+	      String answer = "";
+	      char[] chr = s.toCharArray();
+	      Arrays.sort(chr);
+	      
+	      return answer;
+	  }
+	public static void main(String[] args) {
+		solution("Zbcdefg");
+	}
+}
